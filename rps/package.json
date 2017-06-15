@@ -1,7 +1,10 @@
 {
   "name": "rps",
   "version": "0.0.0",
-  "files": ["src/"],
+  "files": [
+    "src/"
+  ],
+  "main": "src/mainRps.js",
   "devDependencies": {
     "jasmine": "latest"
   }

@@ -1,48 +1,11 @@
-function Rps(){
-    this.playRound = function(p1Throw, p2Throw, observer){
-        new PlayRoundRequest(p1Throw, p2Throw, observer).execute()
-    }
-}
-
-function PlayRoundRequest(p1Throw, p2Throw, observer){
-    this.execute = function(){
-        if (invalid(p1Throw) || invalid(p2Throw))
-            observer.invalid()
-        else if (throwsAreTheSame())
-            observer.tie()
-        else if (p1ThrowBeatsP2Throw()
-        )
-            observer.p1Wins()
-        else
-            observer.p2Wins()
-    }
-
-    const ROCK = "rock"
-    const PAPER = "paper"
-    const SCISSORS = "scissors"
-
-    const validThrows = [ROCK, PAPER, SCISSORS]
-
-    function invalid(t) {
-        return !validThrows.includes(t)
-    }
-
-    function throwsAreTheSame() {
-        return p1Throw === p2Throw
-    }
-
-    function p1ThrowBeatsP2Throw() {
-        return p1Throw === ROCK     && p2Throw === SCISSORS ||
-               p1Throw === PAPER    && p2Throw === ROCK     ||
-               p1Throw === SCISSORS && p2Throw === PAPER
-    }
-}
+const Rps = require("../src/Rps").Rps;
+const FakeRoundRepo = require("./FakeRoundRepo");
 
 describe("playRound", function () {
     let rps
 
     beforeEach(function () {
-        rps = new Rps()
+        rps = new Rps(new FakeRoundRepo())
     })
     
     describe("p1 win scenarios", function () {
